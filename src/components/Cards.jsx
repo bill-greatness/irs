@@ -2,8 +2,9 @@ import {NavLink} from 'react-router-dom'
 /* eslint-disable react/prop-types */
 
 export const Card = ({description, number, background}) => {
+  console.log(background)
     return (
-        <div className={`w-1/5 rounded flex items-center justify-center flex-col text-center p-3 ${background} bg-red-500 text-white`}>
+        <div className={`bg-[${background}] w-1/5 rounded flex items-center justify-center flex-col text-center p-3  text-white`}>
             <h3 className="text-3xl font-bold text-center">{number}</h3>
             <p className="text-lg">{description}</p>
         </div>

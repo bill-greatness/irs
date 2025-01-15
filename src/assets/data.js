@@ -28,5 +28,5 @@ export const LINKS = [
 
 export const DEPARTMENTS = ["Computer Science", "Mathematics", "Others..."]
 export const ROLES  = ["Admin", "Secretary", "Generic Role"]
-export const COLORS = ["#FA003E", "#FF44432", "#24A000", "#DD0033", "#772283", "#0F3A33"]
+export const COLORS = ["#FA003E", "#772283", "#0F3A33"]
 

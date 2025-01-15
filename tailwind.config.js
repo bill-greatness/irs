@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       "backgroundImage":{
-        "welcome":"url(https://solar-training.org/ghana/wp-content/uploads/2021/12/WhatsApp-Image-2021-12-02-at-10.45.41-PM-e1638971744836.jpeg)"
+        "welcome":"url(./assets/ttu_logo.jpg)"
       }
     },
   },

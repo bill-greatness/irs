@@ -23,7 +23,7 @@ export const getDocuments = ({ path, getData }) => {
   onSnapshot(getQuery, (qss) => {
     let temp = [];
     qss.forEach((doc) => {
-      temp.push({ id: doc.id, ...doc.data() });
+      temp.push({  ...doc.data(), id: doc.id });
     });
     getData(temp);
     temp = [];
@@ -80,7 +80,6 @@ export const uploadFile = async ({ path, file, getLink }) => {
 };
 
 export const deleteFile = async ({ url }) => {
-  console.log(url);
   const deleteRef = ref(storage, url);
   await deleteObject(deleteRef);
 };

@@ -9,7 +9,7 @@ import {
 
 export const signIn = async (mail, password) => {
   setPersistence(auth, browserLocalPersistence).then(() => {
-    signInWithEmailAndPassword(auth, mail, password);
+    return signInWithEmailAndPassword(auth, mail, password);
   })
 
 };

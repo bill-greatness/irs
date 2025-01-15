@@ -47,7 +47,7 @@ const queriedStatus = () => {
     <div className="flex-1 mx-2">
       <div className="w-full flex gap-3  p-3">
         {queriedStatus().map((info, idx) => (
-          <Card key={idx} description={info.description} number={info.number} background={`bg-[${COLORS[idx]}]`}/>
+          <Card key={idx + 1} description={info.description} number={info.number} background={COLORS[idx]}/>
         ))}
       </div>
 
@@ -60,8 +60,8 @@ const queriedStatus = () => {
           <table className="w-full table-auto">
             <thead className="bg-gray-400">
               <tr className="text-left text-white border-y">
-                <th className="p-3">Incident ID</th>
-                <th className="p-3">Department</th>
+                <th className="p-3">#</th>
+                <th className="p-3">Message</th>
                 <th className="p-3">Type</th>
                 <th className="p-3">Student</th>
               </tr>
@@ -73,7 +73,7 @@ const queriedStatus = () => {
                 onClick={() => setQuery({ open: true, ...r })}
                 className="text-left cursor-pointer border-b border-b-gray-200"
               >
-                <td className="p-3">#{r.id}</td>
+                <td className="p-3">#{idx + 1}</td>
                 <td className="p-3">{r.message?.trim(0, 50)}</td>
                 <td className="p-3">{r.queryType}</td>
                 <td className="p-3">{r.name}</td>

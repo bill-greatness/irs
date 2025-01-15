@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { updateDocument } from "../firebase/firestore";
 
-export default function ResponseCard({ query, user }) {
+export default function ResponseCard({ query, user}) {
     const [info, setInfo] = useState(query)
-    console.log(info)
-
+  
   useEffect(() => {
     setInfo(query)
   }, [query])
@@ -17,13 +16,14 @@ export default function ResponseCard({ query, user }) {
       ...info,
       attendedToBy: user?.name 
     }
+
+    
     updateDocument({
       path: "/queries",
       id: data.id,
       data: data,
-    });
+    }).then(() => {alert("Query successfully updated"); setInfo({response:''})}).catch((e) => alert(e.message));
 
-    alert("Query has been updated successfully")
   };
   return (
     <div className="w-2/6  p-3">
@@ -54,12 +54,14 @@ export default function ResponseCard({ query, user }) {
             ></textarea>
           </div>
           {/* Status buttons */}
+
+          <p className="py-2 text-sm">Choose Status</p>
           <div className="flex gap-3 my-3">
             <button
             type="button"
               value={"completed"}
               onClick={(e) => setInfo({ ...info, status: e.target.value })}
-              className="w-full text-sm  p-2 bg-gray-200 text-gray-700"
+              className="w-full text-sm  p-2 bg-green-200 text-gray-700"
             >
               Completed
             </button>
@@ -68,7 +70,7 @@ export default function ResponseCard({ query, user }) {
             type="button"
               value={"forwarded"}
               onClick={(e) => setInfo({ ...info, status: e.target.value })}
-              className="w-full p-2 text-sm bg-green-500 text-white"
+              className="w-full p-2 text-sm bg-teal-500 text-white"
             >
               Forwarded
             </button>
@@ -76,7 +78,7 @@ export default function ResponseCard({ query, user }) {
             type="button"
               value={"closed"}
               onClick={(e) => setInfo({ ...info, status: e.target.value })}
-              className="w-full p-2 text-sm bg-green-500 text-white"
+              className="w-full p-2 text-sm bg-red-500 text-white"
             >
               Closed
             </button>
@@ -84,7 +86,7 @@ export default function ResponseCard({ query, user }) {
             type="button"
               value={"ignored"}
               onClick={(e) => setInfo({ ...info, status: e.target.value })}
-              className="w-full p-2 text-sm bg-green-500 text-white"
+              className="w-full p-2 text-sm bg-red-800 text-white"
             >
               Ignored
             </button>
