@@ -4,9 +4,9 @@ import {NavLink} from 'react-router-dom'
 export const Card = ({description, number, background}) => {
   console.log(background)
     return (
-        <div className={`bg-[${background}] w-1/5 rounded flex items-center justify-center flex-col text-center p-3  text-white`}>
-            <h3 className="text-3xl font-bold text-center">{number}</h3>
-            <p className="text-lg">{description}</p>
+        <div className={`${background} p-1 w-1/5 rounded flex items-center justify-center flex-col text-center md:p-3  text-white`}>
+            <h3 className="text-sm md:text-3xl font-bold text-center">{number}</h3>
+            <p className="text-base md:text-lg">{description}</p>
         </div>
     )
 }

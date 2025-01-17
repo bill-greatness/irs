@@ -6,6 +6,7 @@ import ResponseCard from "../components/ResponseCard";
 import { getDocuments } from "../firebase/firestore";
 import { useOutletContext } from "react-router-dom";
 import { COLORS } from "../assets/data";
+import moment from "moment";
 
 export default function Dashboard() {
   const [queries, setQueries] = useState([]);
@@ -63,7 +64,8 @@ const queriedStatus = () => {
                 <th className="p-3">#</th>
                 <th className="p-3">Message</th>
                 <th className="p-3">Type</th>
-                <th className="p-3">Student</th>
+                <th className="p-3">Status</th>
+                <th className="p-3">Time</th>
               </tr>
             </thead>
             <tbody>
@@ -76,7 +78,8 @@ const queriedStatus = () => {
                 <td className="p-3">#{idx + 1}</td>
                 <td className="p-3">{r.message?.trim(0, 50)}</td>
                 <td className="p-3">{r.queryType}</td>
-                <td className="p-3">{r.name}</td>
+                <td className="p-3">{r.status}</td>
+                <td className="p-3">{moment(r.timeStamp?.toDate()).from()}</td>
               </tr>
               ))}
               
