@@ -12,8 +12,8 @@ export const Card = ({description, number, background}) => {
 }
 
 
-export const SideLink = ({name, path, Icon}) => (
-    <NavLink to={path} className={({isActive}) => (isActive ? "bg-yellow-500 text-black flex justify-between p-2" : "p-2 flex justify-between")}>
+export const SideLink = ({name, path, Icon, onClick}) => (
+    <NavLink onClick={onClick} to={path} className={({isActive}) => (isActive ? "bg-yellow-500 text-black flex justify-between p-2" : "p-2 flex justify-between")}>
       <p className="text-md">{name}</p>  <Icon size={25} color="gray"/>
     </NavLink>
 )

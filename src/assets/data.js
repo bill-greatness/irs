@@ -7,22 +7,29 @@ export const LINKS = [
     {
         name:"Dashboard", 
         path:"/", 
-        Icon: LuLayoutDashboard
+        Icon: LuLayoutDashboard,
+        onClick:() => {}
+
     }, 
     {
         name:"History", 
         path:"/history", 
-        Icon: LuHistory
+        Icon: LuHistory,
+        onClick:() => {}
+
     },
     {
         name:"Profiles", 
         path:"/profiles", 
-        Icon: HiOutlineUsers
+        Icon: HiOutlineUsers,
+        onClick:() => {}
     }, 
     {
         name:"Logout", 
         path:"/login", 
-        Icon:IoLogOutOutline
+        Icon:IoLogOutOutline,
+        onClick:() => localStorage.clear()
+
     }
 ]
 
