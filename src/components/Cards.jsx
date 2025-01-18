@@ -26,8 +26,8 @@ export const QueryModal = () => {
 
 
 export const ProfileCard = ({name, department, photo }) => (
-    <div className="flex cursor-pointer hover:scale-105 transition-all duration-500 bg-green-500 flex-col w-1/5 overflow-hidden min-h-60 rounded shadow-md">
-      <img src={photo} className="w-full h-40 bg-black"></img>
+    <div className="flex cursor-pointer hover:scale-105 transition-all duration-500 bg-green-500 flex-col w-1/5 overflow-hidden min-h-80 rounded shadow-md">
+      <img src={photo} className="w-full h-56 bg-black"></img>
       <div className='p-2'>
         <h3 className='text-bold text-lg'>{name}</h3>
         <p className='text-base font-normal'>{department}</p>

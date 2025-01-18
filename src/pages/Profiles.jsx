@@ -31,7 +31,7 @@ export default function Profiles() {
                 <IoPersonAddOutline  size={25}/>
             </button>
         </div>
-        <div className="flex items-center justify-center p-3 w-full flex-wrap gap-3">
+        <div className="flex items-center  p-3 w-full flex-wrap gap-3">
             {profiles?.map(profile => <ProfileCard key={profile?.id} {...profile} /> )}
         </div>
 

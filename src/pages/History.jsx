@@ -5,6 +5,7 @@ import { useOutletContext } from "react-router-dom";
 
 export default function History() {
   const [queries, setQueries] = useState([]);
+  const [searchText, setSearchText] = useState('')
 
   const {user} = useOutletContext()
 
@@ -18,18 +19,60 @@ export default function History() {
 
   const filterQuery = () => {
     // query to be deleted...
+    if (searchText) {
+      return _.filter(queries, (query) =>
+        query.message.toLowerCase().includes(searchText.toLowerCase()) || query.name.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+
+
+    // filter by current admin...
+    if (user?.role === "Admin"){
+      return queries
+    }
+
+
+    // filter by department...
+    if (user?.role === "Department"){
+      return _.filter(queries, (query) => query.department === user?.department)
+    }
+
+
+    // filter by attendedToBy..
+    // filter by department and attendedToBy...
+
     if (user?.role !== "Admin"){
       return _.filter(queries, (query) => query.department === user?.department)
     }
 
+
+
     return queries
   };
+
+  const findStatus = (status) => {
+    if (status === "completed"){
+      return 'bg-green-400/50'
+    }
+    if(status === 'open'){
+      return 'bg-blue-400/50'
+    }
+    if (status === 'ignored'){
+      return 'bg-orange-500/50'
+    }
+    return 'bg-red-500/100 text-white'
+  }
 
   return (
     <div className="flex flex-col p-10">
       <div className="w-full mb-5">
+        <div className='mb-3'>
+          <h1 className='font-bold text-2xl'>All Query History</h1>
+          <p className='text-base'>Search with message or status</p>
+        </div>
         <input
-          className="p-3 rounded bg-gray-300 text-white w-full"
+          onChange={(e) => setSearchText(e.target.value)}
+          className="p-3 rounded bg-gray-500 text-white w-full"
           type="search"
           name="search"
           id="search"
@@ -46,9 +89,9 @@ export default function History() {
             <th className="p-3 text-left">Status</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           {filterQuery()?.map((q, idx) => (
-            <tr className="border-b text-md" key={q.id}>
+            <tr className={`border-b text-md my-1 ${findStatus(q.status)}`} key={q.id}>
               <td className="p-3">#{idx + 1}</td>
               <td className="p-3">{q.name}</td>
               <td className="p-3">{q.message?.trim(0,30)}</td>
