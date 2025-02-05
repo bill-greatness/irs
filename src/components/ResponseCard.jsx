@@ -1,42 +1,65 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import { updateDocument } from "../firebase/firestore";
+import { deleteDocument, updateDocument } from "../firebase/firestore";
+import { GoTrash } from "react-icons/go";
 
-export default function ResponseCard({ query, user}) {
-    const [info, setInfo] = useState(query)
-  
+export default function ResponseCard({ query, user }) {
+  const [info, setInfo] = useState(query);
+
   useEffect(() => {
-    setInfo(query)
-  }, [query])
+    setInfo(query);
+  }, [query]);
 
   const updateQuery = (e) => {
     e.preventDefault();
-   
+
     let data = {
       ...info,
-      attendedToBy: user?.name 
-    }
+      attendedToBy: user?.name,
+    };
 
-    
     updateDocument({
       path: "/queries",
       id: data.id,
       data: data,
-    }).then(() => {alert("Query successfully updated"); setInfo({response:''})}).catch((e) => alert(e.message));
-
+    })
+      .then(() => {
+        alert("Query successfully updated");
+        setInfo({ response: "" });
+      })
+      .catch((e) => alert(e.message));
   };
   return (
     <div className="w-2/6  p-3">
       <div className="flex flex-col">
         {/* text-description here... */}
         <div className="flex flex-col">
-          <h3 className="text-xl py-2 font-bold">Message...</h3>
+          <div className="flex justify-between p-2 items-center">
+            <h3 className="text-xl py-2 font-bold">Message...</h3>
+            {/* Delete Button */}
+            <button
+              className="bg-black p-2 rounded-full"
+              onClick={() =>
+                deleteDocument({
+                  path: "/queries",
+                  id: info.id,
+                })
+              }
+            >
+              <GoTrash size={20} color="white" />
+            </button>
+          </div>
           <p className="font-normal py-4">{info?.message}</p>
           {/* Media */}
           {info.media?.length > 0 && (
             <div className="flex gap-3 my-4 h-32 items-center flex-nowrap overflow-x-auto">
-              {info.media?.map((url) => <img key={url} src={url} className="w-28 object-cover shrink-0 h-28 bg-black" /> )}
-              
+              {info.media?.map((url) => (
+                <img
+                  key={url}
+                  src={url}
+                  className="w-28 object-cover shrink-0 h-28 bg-black"
+                />
+              ))}
             </div>
           )}
         </div>
@@ -58,7 +81,7 @@ export default function ResponseCard({ query, user}) {
           <p className="py-2 text-sm">Choose Status</p>
           <div className="flex gap-3 my-3">
             <button
-            type="button"
+              type="button"
               value={"completed"}
               onClick={(e) => setInfo({ ...info, status: e.target.value })}
               className="w-full text-sm  p-2 bg-green-200 text-gray-700"
@@ -67,7 +90,7 @@ export default function ResponseCard({ query, user}) {
             </button>
 
             <button
-            type="button"
+              type="button"
               value={"forwarded"}
               onClick={(e) => setInfo({ ...info, status: e.target.value })}
               className="w-full p-2 text-sm bg-teal-500 text-white"
@@ -75,7 +98,7 @@ export default function ResponseCard({ query, user}) {
               Forwarded
             </button>
             <button
-            type="button"
+              type="button"
               value={"closed"}
               onClick={(e) => setInfo({ ...info, status: e.target.value })}
               className="w-full p-2 text-sm bg-red-500 text-white"
@@ -83,7 +106,7 @@ export default function ResponseCard({ query, user}) {
               Closed
             </button>
             <button
-            type="button"
+              type="button"
               value={"ignored"}
               onClick={(e) => setInfo({ ...info, status: e.target.value })}
               className="w-full p-2 text-sm bg-red-800 text-white"
