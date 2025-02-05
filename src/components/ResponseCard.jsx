@@ -33,9 +33,9 @@ export default function ResponseCard({ query, user}) {
           <h3 className="text-xl py-2 font-bold">Message...</h3>
           <p className="font-normal py-4">{info?.message}</p>
           {/* Media */}
-          {info.photos && (
+          {info.media?.length > 0 && (
             <div className="flex gap-3 my-4 h-32 items-center flex-nowrap overflow-x-auto">
-              {info.photos?.map((url) => <img key={url} className="w-28 shrink-0 h-28 bg-black" /> )}
+              {info.media?.map((url) => <img key={url} src={url} className="w-28 object-cover shrink-0 h-28 bg-black" /> )}
               
             </div>
           )}
